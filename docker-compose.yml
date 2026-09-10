@@ -1,0 +1,56 @@
+#version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pharma_postgres
+    environment:
+      POSTGRES_USER: pharma
+      POSTGRES_PASSWORD: pharma_dev
+      POSTGRES_DB: pharma_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pharma"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7
+    container_name: pharma_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pharma
+      MONGO_INITDB_ROOT_PASSWORD: pharma_dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  neo4j:
+    image: neo4j:5
+    container_name: pharma_neo4j
+    environment:
+      NEO4J_AUTH: neo4j/pharma_dev
+    ports:
+      - "7474:7474"  # Interface web
+      - "7687:7687"  # Bolt
+    volumes:
+      - neo4j_data:/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: pharma_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  mongo_data:
+  neo4j_data:
+  redis_data:
