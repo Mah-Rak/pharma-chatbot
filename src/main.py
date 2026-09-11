@@ -5,7 +5,7 @@ Lance avec : uvicorn src.main:app --reload
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api import produits, fournisseurs, stocks
+from src.api import produits, fournisseurs, stocks, alertes
 app = FastAPI(
     title="Pharma Chatbot API",
     description="API de gestion de stock pharmaceutique + chatbot",
@@ -27,6 +27,8 @@ app.add_middleware(
 app.include_router(produits.router, prefix="/api/v1")
 app.include_router(fournisseurs.router, prefix="/api/v1")
 app.include_router(stocks.router, prefix="/api/v1")
+app.include_router(alertes.router, prefix="/api/v1")
+
 
 
 @app.get("/", tags=["Racine"])

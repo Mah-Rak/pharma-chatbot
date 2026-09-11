@@ -57,6 +57,7 @@ class StockService:
         """
         Crée une entrée de stock.
         Vérifie que le produit et le fournisseur existent.
+        Déclenche automatiquement une alerte si le stock est bas.
         """
         # Vérifier que le produit existe
         produit = db.query(Produit).filter(Produit.id == data.produit_id).first()
@@ -75,11 +76,19 @@ class StockService:
         db.add(stock)
         db.commit()
         db.refresh(stock)
+
+        # Hook : vérifier et créer une alerte si nécessaire
+        from src.services.alerte_service import AlerteService
+        AlerteService.verifier_et_creer_alerte(db, stock)
+
         return stock
 
     @staticmethod
     def update(db: Session, stock_id: int, data: StockUpdate) -> Optional[Stock]:
-        """Met à jour une entrée de stock."""
+        """
+        Met à jour une entrée de stock.
+        Déclenche automatiquement la gestion des alertes.
+        """
         stock = StockService.get_by_id(db, stock_id)
         if not stock:
             return None
@@ -97,6 +106,11 @@ class StockService:
 
         db.commit()
         db.refresh(stock)
+
+        # Hook : vérifier et gérer les alertes
+        from src.services.alerte_service import AlerteService
+        AlerteService.verifier_et_creer_alerte(db, stock)
+
         return stock
 
     @staticmethod
