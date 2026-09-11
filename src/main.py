@@ -42,3 +42,7 @@ def root():
 def health():
     """Vérifie que l'API est en ligne."""
     return {"status": "ok"}
+
+
+
+
