@@ -1,0 +1,153 @@
+{
+  "symptomes": [
+    {"nom": "fievre", "synonymes": ["fievre", "temperature", "hyperthermie", "chaud"], "gravite": "normale"},
+    {"nom": "mal_de_tete", "synonymes": ["mal de tete", "cephalee", "migraine", "mal au crane", "mal a la tete"], "gravite": "normale"},
+    {"nom": "fatigue", "synonymes": ["fatigue", "epuise", "epuisement", "faiblesse", "asthenie"], "gravite": "normale"},
+    {"nom": "courbatures", "synonymes": ["courbatures", "douleur musculaire", "douleurs musculaires", "mal partout"], "gravite": "normale"},
+    {"nom": "mal_de_gorge", "synonymes": ["mal de gorge", "gorge douloureuse", "gorge qui gratte", "angine"], "gravite": "normale"},
+    {"nom": "nez_qui_coule", "synonymes": ["nez qui coule", "rhinorrhee", "nez bouché", "nez bouche", "ecoulement nasal"], "gravite": "normale"},
+    {"nom": "eternuements", "synonymes": ["eternuements", "eternue", "eternuer"], "gravite": "normale"},
+    {"nom": "toux_seche", "synonymes": ["toux seche", "toux sèche", "toux irritative"], "gravite": "normale"},
+    {"nom": "toux_grasse", "synonymes": ["toux grasse", "toux productive", "toux avec glaires", "crachats"], "gravite": "normale"},
+    {"nom": "essoufflement", "synonymes": ["essoufflement", "dyspnee", "mal a respirer", "souffle court"], "gravite": "urgente"},
+    {"nom": "nausee", "synonymes": ["nausee", "nausees", "envie de vomir", "mal au coeur"], "gravite": "normale"},
+    {"nom": "vomissement", "synonymes": ["vomissement", "vomissements", "vomi", "vomir"], "gravite": "normale"},
+    {"nom": "diarrhee", "synonymes": ["diarrhee", "diarrhees", "selles liquides", "chiasse"], "gravite": "normale"},
+    {"nom": "constipation", "synonymes": ["constipation", "constipe", "difficulte a aller aux toilettes"], "gravite": "normale"},
+    {"nom": "brulures_estomac", "synonymes": ["brulures d'estomac", "brulure estomac", "reflux", "acidite", "aigreurs"], "gravite": "normale"},
+    {"nom": "ballonnements", "synonymes": ["ballonnements", "ballonne", "ventre gonfle", "gaz"], "gravite": "normale"},
+    {"nom": "douleur_abdominale", "synonymes": ["mal au ventre", "douleur abdominale", "mal au bide", "crampes abdominales"], "gravite": "normale"},
+    {"nom": "demangeaisons", "synonymes": ["demangeaisons", "demangeaison", "prurit", "ca gratte", "grattage"], "gravite": "normale"},
+    {"nom": "rougeurs_peau", "synonymes": ["rougeurs", "rougeur", "erytheme", "peau rouge"], "gravite": "normale"},
+    {"nom": "boutons", "synonymes": ["boutons", "bouton", "acne", "eruption cutanee"], "gravite": "normale"},
+    {"nom": "yeux_rouges", "synonymes": ["yeux rouges", "oeil rouge", "conjonctivite", "yeux irrites"], "gravite": "normale"},
+    {"nom": "oreille_douloureuse", "synonymes": ["mal a l'oreille", "oreille douloureuse", "otite", "oreille qui fait mal"], "gravite": "normale"},
+    {"nom": "douleur_dentaire", "synonymes": ["mal aux dents", "douleur dentaire", "rage de dent", "dent qui fait mal"], "gravite": "normale"},
+    {"nom": "insomnie", "synonymes": ["insomnie", "difficulte a dormir", "je dors mal", "pas sommeil"], "gravite": "normale"},
+    {"nom": "anxiete", "synonymes": ["anxiete", "anxieux", "stress", "angoisse", "nerveux"], "gravite": "normale"},
+    {"nom": "douleur_thoracique", "synonymes": ["douleur thoracique", "mal a la poitrine", "douleur poitrine", "oppression"], "gravite": "urgente"},
+    {"nom": "palpitations", "synonymes": ["palpitations", "coeur qui bat vite", "tachycardie"], "gravite": "urgente"},
+    {"nom": "perte_connaissance", "synonymes": ["perte de connaissance", "evanouissement", "syncope", "malaise"], "gravite": "critique"}
+  ],
+
+  "maladies": [
+    {
+      "nom": "Grippe",
+      "symptomes": ["fievre", "courbatures", "fatigue", "mal_de_tete", "toux_seche"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Rhume",
+      "symptomes": ["nez_qui_coule", "eternuements", "mal_de_gorge", "toux_seche"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Angine",
+      "symptomes": ["mal_de_gorge", "fievre", "difficulte_avaler"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Bronchite",
+      "symptomes": ["toux_grasse", "fatigue", "essoufflement", "fievre"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Gastro_enterite",
+      "symptomes": ["diarrhee", "nausee", "vomissement", "douleur_abdominale", "fievre"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Allergie_saisonniere",
+      "symptomes": ["eternuements", "nez_qui_coule", "demangeaisons", "yeux_rouges"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Conjonctivite",
+      "symptomes": ["yeux_rouges", "demangeaisons", "larmoiement"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Otite",
+      "symptomes": ["oreille_douloureuse", "fievre", "fatigue"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Migraine",
+      "symptomes": ["mal_de_tete", "nausee", "fatigue"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Reflux_gastrique",
+      "symptomes": ["brulures_estomac", "ballonnements", "nausee"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Constipation_simple",
+      "symptomes": ["constipation", "ballonnements", "douleur_abdominale"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Insomnie_passagere",
+      "symptomes": ["insomnie", "fatigue", "anxiete"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Anxiete_legere",
+      "symptomes": ["anxiete", "insomnie", "fatigue"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Ulcere_estomac",
+      "symptomes": ["brulures_estomac", "douleur_abdominale", "nausee"],
+      "gravite": "normale"
+    },
+    {
+      "nom": "Infection_urinaire",
+      "symptomes": ["brulures_urinaires", "douleur_abdominale", "fievre"],
+      "gravite": "normale"
+    }
+  ],
+
+  "medicaments": [
+    {"nom": "Paracetamol", "dci": "Paracétamol", "ordonnance_requise": false, "description": "Antidouleur et antipyrétique", "categorie": "Antalgique"},
+    {"nom": "Ibuprofene", "dci": "Ibuprofène", "ordonnance_requise": false, "description": "Anti-inflammatoire non stéroïdien", "categorie": "AINS"},
+    {"nom": "Aspirine", "dci": "Acide acétylsalicylique", "ordonnance_requise": false, "description": "Antidouleur, antipyrétique, anti-inflammatoire", "categorie": "Antalgique"},
+    {"nom": "Sirop_toux_grasse", "dci": "Carbocistéine", "ordonnance_requise": false, "description": "Fluidifie les sécrétions bronchiques", "categorie": "Mucolytique"},
+    {"nom": "Sirop_toux_seche", "dci": "Dextrométhorphane", "ordonnance_requise": false, "description": "Calme la toux sèche", "categorie": "Antitussif"},
+    {"nom": "Pastilles_gorge", "dci": "Lidocaïne", "ordonnance_requise": false, "description": "Soulage la gorge irritée", "categorie": "Antalgique local"},
+    {"nom": "Antihistaminique", "dci": "Cétirizine", "ordonnance_requise": false, "description": "Antiallergique", "categorie": "Antihistaminique"},
+    {"nom": "Anti_acide", "dci": "Oméprazole", "ordonnance_requise": false, "description": "Réduit l'acidité gastrique", "categorie": "Antiacide"},
+    {"nom": "Laxatif", "dci": "Macrogol", "ordonnance_requise": false, "description": "Facilite le transit intestinal", "categorie": "Laxatif"},
+    {"nom": "Vitamine_C", "dci": "Acide ascorbique", "ordonnance_requise": false, "description": "Renforce les défenses immunitaires", "categorie": "Vitamine"},
+    {"nom": "Antispasmodique", "dci": "Phloroglucinol", "ordonnance_requise": false, "description": "Calme les spasmes digestifs", "categorie": "Antispasmodique"},
+    {"nom": "Solution_rehydratation", "dci": "Sels de réhydratation", "ordonnance_requise": false, "description": "Compense les pertes en cas de diarrhée", "categorie": "Réhydratant"},
+    {"nom": "Antiemetique", "dci": "Métoclopramide", "ordonnance_requise": true, "description": "Contre les nausées et vomissements", "categorie": "Antiémétique"},
+    {"nom": "Antibiotique_amoxicilline", "dci": "Amoxicilline", "ordonnance_requise": true, "description": "Antibiotique à large spectre", "categorie": "Antibiotique"},
+    {"nom": "Collyre", "dci": "Azélastine", "ordonnance_requise": false, "description": "Soulage les yeux irrités", "categorie": "Collyre"}
+  ],
+
+  "associations": [
+    {"maladie": "Grippe", "medicaments": ["Paracetamol", "Vitamine_C"]},
+    {"maladie": "Rhume", "medicaments": ["Paracetamol", "Pastilles_gorge", "Sirop_toux_seche"]},
+    {"maladie": "Angine", "medicaments": ["Paracetamol", "Pastilles_gorge"]},
+    {"maladie": "Bronchite", "medicaments": ["Sirop_toux_grasse", "Paracetamol"]},
+    {"maladie": "Gastro_enterite", "medicaments": ["Solution_rehydratation", "Antispasmodique", "Paracetamol"]},
+    {"maladie": "Allergie_saisonniere", "medicaments": ["Antihistaminique"]},
+    {"maladie": "Conjonctivite", "medicaments": ["Collyre"]},
+    {"maladie": "Otite", "medicaments": ["Paracetamol", "Ibuprofene"]},
+    {"maladie": "Migraine", "medicaments": ["Paracetamol", "Ibuprofene"]},
+    {"maladie": "Reflux_gastrique", "medicaments": ["Anti_acide"]},
+    {"maladie": "Constipation_simple", "medicaments": ["Laxatif"]},
+    {"maladie": "Insomnie_passagere", "medicaments": ["Vitamine_C"]},
+    {"maladie": "Anxiete_legere", "medicaments": ["Vitamine_C"]},
+    {"maladie": "Ulcere_estomac", "medicaments": ["Anti_acide"]},
+    {"maladie": "Infection_urinaire", "medicaments": ["Antibiotique_amoxicilline"]}
+  ],
+
+  "cas_graves": [
+    {"symptome": "douleur_thoracique", "message": "Douleur thoracique détectée. Appelez immédiatement le 15 ou le 112."},
+    {"symptome": "essoufflement", "message": "Difficulté respiratoire détectée. Consultez un médecin en urgence."},
+    {"symptome": "palpitations", "message": "Palpitations détectées. Consultez un médecin rapidement."},
+    {"symptome": "perte_connaissance", "message": "Perte de connaissance détectée. Appelez immédiatement le 15."}
+  ]
+}
