@@ -1,5 +1,6 @@
 # API
 fastapi==0.109.0
+starlette==0.35.1
 uvicorn[standard]==0.27.0
 
 # Bases de données
@@ -22,6 +23,8 @@ spacy==3.8.7
 streamlit==1.30.0
 
 # Utils
+protobuf==4.25.9
+websockets==17.1
 python-dotenv==1.0.0
 pydantic>=2.6.0
 pydantic-settings==2.1.0
