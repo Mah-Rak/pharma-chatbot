@@ -41,4 +41,5 @@ class ChatResponse(BaseModel):
     reponse: str = Field(..., description="Message texte à afficher au client")
     est_urgent: bool = False
     avertissement: Optional[str] = None
+    transcription: Optional[dict] = None
     timestamp: datetime = Field(default_factory=datetime.now)

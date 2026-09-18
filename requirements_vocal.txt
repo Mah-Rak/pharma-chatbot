@@ -1,0 +1,10 @@
+# Environnement Python 3.12 dédié au service vocal
+
+# Transcription
+faster-whisper==1.0.3
+requests>=2.31.0
+
+# Microservice API
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.9

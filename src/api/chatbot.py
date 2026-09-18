@@ -66,3 +66,74 @@ def get_stats():
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Erreur : {str(e)}",
         )
+
+# ============ AUDIO ============
+
+from fastapi import File, UploadFile
+
+
+@router.post(
+    "/audio",
+    response_model=ChatResponse,
+    summary="Interroger le chatbot via un fichier audio",
+)
+async def chat_audio(
+    file: UploadFile = File(..., description="Fichier audio (WAV, MP3...)"),
+    db: Session = Depends(get_db),
+):
+    """Recoit un audio, le transcrit, puis traite le texte comme un message."""
+    from src.services.vocal_client import get_vocal_client
+
+    # Verifier l'extension
+    extensions_ok = (".wav", ".mp3", ".ogg", ".m4a", ".webm")
+    if not file.filename or not file.filename.lower().endswith(extensions_ok):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Format audio non supporte",
+        )
+
+    # Lire l'audio
+    audio_bytes = await file.read()
+    if not audio_bytes:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Fichier audio vide",
+        )
+
+    # Verifier le microservice vocal
+    vocal = get_vocal_client()
+    if not vocal.health():
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Service vocal indisponible. Lancez : uvicorn src.vocal_api:app --port 8001",
+        )
+
+    # Transcrire
+    result = vocal.transcrire(audio_bytes, filename=file.filename)
+    if result is None:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Erreur lors de la transcription",
+        )
+
+    texte = result["texte"]
+    if not texte.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Aucun texte detecte dans l'audio",
+        )
+
+    # Traiter comme un message texte
+    request = ChatRequest(message=texte)
+    chatbot = get_chatbot_service()
+    response = chatbot.traiter(request, db)
+
+    # Enrichir avec les infos audio
+    response_dict = response.model_dump()
+    response_dict["transcription"] = {
+        "texte": texte,
+        "langue": result["langue"],
+        "duree": result["duree"],
+    }
+
+    return response_dict
