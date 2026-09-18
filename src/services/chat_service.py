@@ -1,7 +1,7 @@
 """
 Service de logs des conversations dans MongoDB.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, List
 
 from pymongo import MongoClient
@@ -13,7 +13,7 @@ from src.config import get_settings
 class ChatLogService:
     """Gère les logs de conversations dans MongoDB."""
 
-    def __init__(self):
+    def __init__(self, db_name: Optional[str] = None):
         settings = get_settings()
         self.client = MongoClient(
             host=settings.mongo_host,
@@ -22,7 +22,8 @@ class ChatLogService:
             password=settings.mongo_password,
             authSource="admin",
         )
-        self.db = self.client[settings.mongo_db]
+        # Utilise db_name si fourni (tests), sinon la base de dev
+        self.db = self.client[db_name or settings.mongo_db]
         self.collection: Collection = self.db["conversations"]
 
     def log_conversation(
@@ -44,7 +45,7 @@ class ChatLogService:
             "medicaments": medicaments,
             "reponse": reponse,
             "est_urgent": est_urgent,
-            "timestamp": datetime.utcnow(),
+	    "timestamp": datetime.now(timezone.utc),
         }
         result = self.collection.insert_one(doc)
         return str(result.inserted_id)

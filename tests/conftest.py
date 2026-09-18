@@ -55,3 +55,47 @@ def client(db_session):
     with TestClient(app) as test_client:
         yield test_client
     app.dependency_overrides.clear()
+
+# ============================================================
+# Fixtures MongoDB (tests d'intégration)
+# ============================================================
+
+@pytest.fixture
+def chat_log_service_test():
+    """
+    Service de logs MongoDB utilisant une base de test séparée.
+    Nettoie la base avant et après chaque test.
+    """
+    from src.services.chat_service import ChatLogService
+
+    service = ChatLogService(db_name="pharma_chat_test")
+    # Nettoyer avant
+    service.collection.delete_many({})
+    yield service
+    # Nettoyer après
+    service.collection.delete_many({})
+    service.close()
+
+
+@pytest.fixture
+def chatbot_test(monkeypatch, chat_log_service_test):
+    """
+    ChatbotService avec MongoDB de test.
+    Reset le singleton pour garantir l'isolation.
+    """
+    import src.nlp.chatbot as chatbot_module
+
+    # Reset le singleton
+    chatbot_module._instance = None
+
+    # Monkeypatch get_chat_log_service
+    monkeypatch.setattr(
+        chatbot_module,
+        "get_chat_log_service",
+        lambda: chat_log_service_test,
+    )
+
+    yield chatbot_module.get_chatbot_service()
+
+    # Reset après
+    chatbot_module._instance = None
