@@ -5,7 +5,7 @@ Lance avec : uvicorn src.main:app --reload
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api import produits, fournisseurs, stocks, alertes
+from src.api import produits, fournisseurs, stocks, alertes,chatbot 
 app = FastAPI(
     title="Pharma Chatbot API",
     description="API de gestion de stock pharmaceutique + chatbot",
@@ -28,6 +28,7 @@ app.include_router(produits.router, prefix="/api/v1")
 app.include_router(fournisseurs.router, prefix="/api/v1")
 app.include_router(stocks.router, prefix="/api/v1")
 app.include_router(alertes.router, prefix="/api/v1")
+app.include_router(chatbot.router, prefix="/api/v1")
 
 
 
@@ -45,6 +46,7 @@ def root():
 def health():
     """Vérifie que l'API est en ligne."""
     return {"status": "ok"}
+
 
 
 
