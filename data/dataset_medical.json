@@ -608,7 +608,10 @@
         "demangeaison",
         "prurit",
         "ca gratte",
-        "je me gratte"
+        "ca me gratte",
+        "je me gratte",
+        "me gratte",
+        "grattouille"
       ],
       "gravite": "normale",
       "categorie": "peau"
@@ -808,8 +811,13 @@
       "nom": "mal_de_dos",
       "synonymes": [
         "mal de dos",
+        "mal au dos",
         "douleur dos",
-        "lombalgie"
+        "lombalgie",
+        "dos qui fait mal",
+        "j'ai mal au dos",
+        "j'ai mal de dos",
+        "douleurs dorsales"
       ],
       "gravite": "normale",
       "categorie": "musculo"
@@ -819,8 +827,10 @@
       "synonymes": [
         "douleur cervicale",
         "mal au cou",
+        "mal de cou",
         "cervicalgie",
-        "nuque raide"
+        "nuque raide",
+        "j'ai mal au cou"
       ],
       "gravite": "normale",
       "categorie": "musculo"
