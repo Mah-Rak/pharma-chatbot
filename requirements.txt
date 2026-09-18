@@ -20,7 +20,7 @@ nltk==3.8.1
 spacy==3.8.7
 
 # Interface
-streamlit==1.30.0
+streamlit==1.40.0
 
 # Utils
 protobuf==4.25.9

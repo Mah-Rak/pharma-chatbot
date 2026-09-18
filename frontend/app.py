@@ -159,9 +159,45 @@ for msg in st.session_state.messages:
                 st.warning(details["avertissement"])
 
 
-# Champ de saisie
-prompt = st.chat_input("Décrivez vos symptômes...")
+# ============ SAISIE ============
 
-if prompt:
-    traiter_message(prompt)
-    st.rerun()
+# Onglets : texte OU vocal
+tab_texte, tab_vocal = st.tabs(["⌨️ Écrire", "🎤 Parler"])
+
+with tab_texte:
+    prompt = st.chat_input("Décrivez vos symptômes...", key="chat_text")
+    if prompt:
+        traiter_message(prompt)
+        st.rerun()
+
+with tab_vocal:
+    st.caption("Enregistrez votre voix puis cliquez sur 'Traiter l'audio'.")
+    audio_value = st.audio_input("Enregistrer votre voix", key="audio_record")
+
+    if audio_value is not None:
+        st.audio(audio_value)
+        if st.button("🎯 Traiter l'audio", type="primary", use_container_width=True):
+            with st.spinner("Transcription et analyse en cours..."):
+                try:
+                    response = st.session_state.api_client.chat_audio(
+                        audio_bytes=audio_value.getvalue(),
+                        filename="audio.wav",
+                    )
+
+                    # Ajouter la transcription comme message utilisateur
+                    transcription = response.get("transcription", {}).get("texte", "")
+                    st.session_state.messages.append({
+                        "role": "user",
+                        "content": f"🎤 {transcription}" if transcription else "🎤 [audio]",
+                    })
+
+                    # Ajouter la réponse du bot
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": response["reponse"],
+                        "details": response,
+                    })
+
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Erreur : {e}")

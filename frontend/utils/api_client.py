@@ -34,6 +34,21 @@ class APIClient:
         r.raise_for_status()
         return r.json()
 
+    def chat_audio(
+        self,
+        audio_bytes: bytes,
+        filename: str = "audio.wav",
+    ) -> Dict[str, Any]:
+        """Envoie un fichier audio au chatbot."""
+        files = {"file": (filename, audio_bytes, "audio/wav")}
+        r = requests.post(
+            f"{self.base_url}/chatbot/audio",
+            files=files,
+            timeout=90,  # Whisper peut être lent
+        )
+        r.raise_for_status()
+        return r.json()
+
     def chatbot_stats(self) -> Dict[str, Any]:
         """Récupère les stats du chatbot."""
         r = requests.get(f"{self.base_url}/chatbot/stats", timeout=self.timeout)
